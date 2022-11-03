@@ -1,0 +1,19 @@
+{
+    "name": "groweb/app",
+    "require": {
+        "php": ">=7.0",
+        "phpmailer/phpmailer": "^6.6"
+    },
+    "authors": [
+        {
+            "name": "Rafael Duarte de Freitas",
+            "email": "rafa.duartef@outlook.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/",
+            "MF\\": "vendor/MF/"
+        }
+    }
+}

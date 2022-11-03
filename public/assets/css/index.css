@@ -1,0 +1,50 @@
+.indexContent {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.home {
+  width: 86%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 55px;
+}
+.titleHome {
+  font-size: 40pt;
+  color: #201b3c;
+}
+.home-left, .home-right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.parHome {
+  color: white;
+  overflow: hidden;
+  font-family: 'RobotoL';
+  font-size: 18pt;
+  margin-top: -7px;
+}
+.imgHome {
+  width: 100%;
+}
+.btnPlanosHome {
+  background: white;
+  color: #00ff88;
+  padding: 10px 20px;
+  border: none;
+  width: 60%;
+  text-transform: uppercase;
+  float: left;
+  overflow: hidden;
+  margin-top: 15px;
+  font-size: 11pt;
+}
+.btnPlanosHome:hover {
+  cursor: pointer;
+  background: #201b3c;
+  color: white;
+  opacity: 90%;
+}

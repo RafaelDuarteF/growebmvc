@@ -1,0 +1,48 @@
+    <?php
+        if(isset($this->view->erroCadastro)) {
+            if($this->view->erroCadastro == 'emailInvalido') {
+                ?>
+                <script>
+                    swal('Erro', 'E-Mail informado inválido! Tente novamente com outro e-mail.', 'warning');
+                </script>
+                <?php
+            }
+        }
+    ?>
+    <div class="main-cadastro">
+        <div class="left-part-cadastro">
+            <div class="logotipo-growebCad" onclick="redirect('/')">
+                GROWEB
+            </div>
+            <div class="anuncCadastro">
+                <img class="imgSignUp" src="assets/img/signUp.png"/>
+                <p><b>Entre conosco e expanda seu negócio ao mundo!</b></p>
+            </div>
+        </div>
+        <div class="right-part-cadastro">
+            <div class="formCad">
+                <h1>Vamos começar</h1>
+                <p>Já possui uma conta conosco? <a href="/login">logar</a>
+                <div class="line"></div>
+                <h2>Cadastre-se</h2>
+                <form id="cadFm" method="POST" action="/cadastrar">
+                    <div id="cad">
+                        <div class="infos1">
+                            <label id="lblUsername" for="username"><b>Nome de usuário: </b><a class="statusNome"></a></label><br>
+                            <input class="inputCad" type="text" name="username" placeholder="Ex: Rafo123" id="username"/><br>
+                            <label for="password"><b>Senha:</b></label><br>
+                            <input class="inputCad" type="password" name="password" placeholder="Ex: Eaam_2006" id="password"/><br>
+                        </div>
+                        <div class="infos2">
+                            <label for="telefone"><b>Telefone:</b></label><br>
+                            <input class="inputCad" type="text" placeholder="Ex: 11-941232313" name="telefone" id="telefone"/><br>
+                            <label for="email"><b>E-Mail:</b></label><br>
+                            <input class="inputCad" type="email" placeholder="Ex: rafaeldd@seuemail.com" name="email" id="email"/><br>
+                        </div>
+                    </div>
+                    <input type="checkbox" name="termsCk" id="termsCk"><label class="lblTerms" for="termsCk">Eu aceito os <a>Termos de Serviço</a> e a <a>Política de Privacidade</a> da Groweb</label>
+                    <button type="button" class="btnCad"><b>Cadastrar</b></button>
+                </form>
+            </div>
+        </div>
+    </div>

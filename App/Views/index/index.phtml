@@ -1,0 +1,48 @@
+    <?php
+        if(isset($this->view->erroCadastro) && !empty($this->view->erroCadastro)) {
+            if($this->view->erroCadastro == true) {
+            ?>
+                <script>
+                    swal({
+                        title: "Erro!",
+                        text: "Ocorreu um erro ao tentar se cadastrar",
+                        icon: "warning",
+                        button: "Ok",
+                        })
+                        .then((confirmError) => {
+                            location.assign('/');
+                        });
+                </script>
+            <?php  
+            }
+            else {
+            ?>
+                <script>
+                    swal({
+                        title: "Erro!",
+                        text: "Erro de número: ' + <?php echo $this->view->erroCadastro; ?> + ' ocorrido ao tentar se cadastrar.",
+                        icon: "warning",
+                        button: "Ok",
+                        })
+                        .then((confirmError) => {
+                            location.assign('/');
+                        });
+                </script>
+            <?php
+            }
+        }
+    ?>
+    <div class="content">
+        <div class="indexContent sw">
+            <div class="home">
+                <div class="home-left">
+                    <h1 class="titleHome">Eleve o seu negócio ao mundo, invista em nós.</h1>
+                    <p class="parHome">O Groweb desenvolve para você a ferramenta necessária para o sucesso de um negócio, sua dinâmica, acessibilidade e divulgação.</p>
+                    <button class="btnPlanosHome"><b>confira nossos planos</b></button>
+                </div>
+                <div class="home-right">
+                    <img class="imgHome" src="assets/img/myPlan.png"/>
+                </div>
+            </div>
+        </div>
+    </div>
