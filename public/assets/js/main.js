@@ -73,7 +73,7 @@ $(document).ready(function(){
         else if(pass.length < 8){
             swal("Senha inválida!", "Insira uma senha com mais de 8 caracteres.", "error");
         }
-        else if(tel.length < 11){
+        else if((tel.length < 13 || tel.length > 14) || tel.substring(0, 1) != '(' || tel.substring(3, 4) != ')'){
             swal("Telefone inválido!", "Insira um telefone válido.", "error");
         }
         else if(ckTerm != true){

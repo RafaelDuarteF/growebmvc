@@ -7,6 +7,11 @@
                 </script>
                 <?php
             }
+            if(isset($this->view->insertsErroCadastro)) {
+                $nomeIn = $this->view->insertsErroCadastro['nome'];
+                $telIn = $this->view->insertsErroCadastro['telefone'];
+                $emailIn = $this->view->insertsErroCadastro['email'];
+            }
         }
     ?>
     <div class="main-cadastro">
@@ -29,15 +34,15 @@
                     <div id="cad">
                         <div class="infos1">
                             <label id="lblUsername" for="username"><b>Nome de usuário: </b><a class="statusNome"></a></label><br>
-                            <input class="inputCad" type="text" name="username" placeholder="Ex: Rafo123" id="username"/><br>
+                            <input class="inputCad" type="text" value="<?= $nomeIn; ?>" name="username" placeholder="Ex: Rafo123" id="username"/><br>
                             <label for="password"><b>Senha:</b></label><br>
                             <input class="inputCad" type="password" name="password" placeholder="Ex: Eaam_2006" id="password"/><br>
                         </div>
                         <div class="infos2">
                             <label for="telefone"><b>Telefone:</b></label><br>
-                            <input class="inputCad" type="text" placeholder="Ex: 11-941232313" name="telefone" id="telefone"/><br>
+                            <input class="inputCad" type="text" value="<?= $telIn; ?>" placeholder="Ex: (11) 941232313" oninput="mascaraTel(this)" name="telefone" id="telefone"/><br>
                             <label for="email"><b>E-Mail:</b></label><br>
-                            <input class="inputCad" type="email" placeholder="Ex: rafaeldd@seuemail.com" name="email" id="email"/><br>
+                            <input class="inputCad" type="email" value="<?= $emailIn; ?>" placeholder="Ex: rafaeldd@seuemail.com" name="email" id="email"/><br>
                         </div>
                     </div>
                     <input type="checkbox" name="termsCk" id="termsCk"><label class="lblTerms" for="termsCk">Eu aceito os <a>Termos de Serviço</a> e a <a>Política de Privacidade</a> da Groweb</label>
@@ -46,3 +51,19 @@
             </div>
         </div>
     </div>
+    <script>
+         function mascaraTel(i){
+   
+            var v = i.value;
+            
+            if(isNaN(v[v.length-1])){ // impede entrar outro caractere que não seja número
+                i.value = v.substring(0, v.length-1);
+                return;
+            }
+            
+            i.setAttribute("maxlength", "14");
+            if (v.length == 1) i.value = "(" + i.value;
+            if (v.length == 3) i.value += ") ";
+
+        }
+    </script>

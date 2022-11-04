@@ -24,7 +24,15 @@
         }
         public function cadastro() {
             $getErroCadastroUrl = isset($_GET['erroCadastro']) ? $_GET['erroCadastro'] : '';
+            $getNomeCadastroErro = isset($_GET['nomeus']) ? $_GET['nomeus'] : '';
+            $getTelefoneCadastroErro = isset($_GET['telin']) ? $_GET['telin'] : '';
+            $getEmailCadastroErro = isset($_GET['emailin']) ? $_GET['emailin'] : '';
             $this->view->erroCadastro = $getErroCadastroUrl;
+            $this->view->insertsErroCadastro = array(
+                'nome' => $getNomeCadastroErro,
+                'email' => $getEmailCadastroErro,
+                'telefone' => $getTelefoneCadastroErro,
+            );
             $this->render('cadastro', 'layoutNHeader');
         }
         public function verificarUsername() {
@@ -54,7 +62,7 @@
                         $usuario->salvar();
                     }
                     else {
-                        header("Location: /cadastro?erroCadastro=emailInvalido");
+                        header("Location: /cadastro?erroCadastro=emailInvalido&nomeus={$usuario->__get('nome')}&telin={$usuario->__get('telefone')}&emailin={$usuario->__get('email')}");
                     }
                 }
                 else {
