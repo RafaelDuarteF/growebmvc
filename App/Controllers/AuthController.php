@@ -31,7 +31,7 @@
             session_start();
             session_destroy();
             $this->setCookieLogin('unset');
-            header('Location: /');
+            header("Location: ".$_SERVER['HTTP_REFERER']."");
         }
     }
 

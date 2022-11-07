@@ -16,7 +16,7 @@
             <div class="menuUser">
             <ul>
                 <li>Minha Conta</li>
-                <li>Meu Projeto</li>
+                <li onclick="redirect('/meuProjeto')">Meu Projeto</li>
                 <li id="sairPerfil" onclick="redirect('/sair')">SAIR</li>
             </ul>
         </div>

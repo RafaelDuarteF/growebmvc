@@ -1,0 +1,51 @@
+.meuProjeto {
+    width: 100vw;
+    height: calc(100vh - 90px);
+    background-color: #201b3c;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.titleProjeto {
+    color: white;
+}
+.projeto {
+    height: 100%;
+    display: flex;
+}
+.infosProjeto {
+    margin-left: 40px;
+    margin-top: 70px;
+    width: 50%;
+}
+.infosProjetoText {
+    color: gainsboro;
+    margin: 0px;
+}
+.infosProjetoText a {
+    color: #00ff88;
+}
+.valorProjeto {
+    font-size: 18pt;
+    color: #00ff88;
+    margin-top: 10px;
+}
+.direitosPlano {
+    width: 45%;
+    margin-top: 70px;
+    margin-bottom: 70px;
+    margin-right: 40px;
+    background: #252525;
+    border-radius: 20px;
+    float: right;
+    box-shadow: 0px 0px 10px 0px #00ff88;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.infoDireitosPlano {
+    margin-top: 20px;
+}
+.titleDireitos {
+    color: #00ff88;
+}

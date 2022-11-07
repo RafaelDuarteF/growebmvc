@@ -38,8 +38,3 @@ body * {
   align-items: center;
   flex-direction: column;
 }
-.sw {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}

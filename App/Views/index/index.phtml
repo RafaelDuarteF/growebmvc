@@ -31,6 +31,23 @@
             <?php
             }
         }
+        if(isset($this->view->erroAutenticacao)) {
+            if($this->view->erroAutenticacao == true) {
+                ?>
+                <script>
+                    swal({
+                        title: "Erro!",
+                        text: "Você precisa estar logado para acessar este conteúdo!",
+                        icon: "warning",
+                        button: "Ok",
+                        })
+                        .then((confirmError) => {
+                            location.assign('/');
+                        });
+                </script>
+                <?php
+            }
+        }
     ?>
     <div class="content">
         <div class="indexContent sw">

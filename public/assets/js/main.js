@@ -2,6 +2,7 @@ $(document).ready(function(){
     menuUser = $(".menuUser"); menuUser.hide();
     $(function(){
         $(".sw").css("width", screen.width);
+        $(".sh").css("height", screen.height);
         $(".rCardPerfil").css("height", screen.height);
     });
 

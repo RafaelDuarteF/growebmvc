@@ -44,6 +44,11 @@
                 'controller' => 'indexController',
                 'action' => 'verificarEmail'
             );
+            $routes['meuProjeto'] = array(
+                'route' => '/meuProjeto',
+                'controller' => 'appController',
+                'action' => 'meuProjeto'
+            );
 
             $this->setRoutes($routes);
         }

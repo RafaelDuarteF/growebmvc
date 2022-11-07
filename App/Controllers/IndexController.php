@@ -7,6 +7,10 @@
     class IndexController extends Action{
         public function index() {
             $getErroCadastroUrl = isset($_GET['erroCadastro']) ? $_GET['erroCadastro'] : '';
+            $getErroAutenticacao = isset($_GET['erroAutenticacao']) ? $_GET['erroAutenticacao'] : '';
+            if(!empty($getErroAutenticacao)) {
+                $this->view->erroAutenticacao = $getErroAutenticacao;
+            }
             $this->view->erroCadastro = $getErroCadastroUrl;
             $this->viewUsuario();
             if(isset($this->view->usuario['cookiesLogin'])) {
@@ -17,6 +21,7 @@
                     $this->setCookieLogin('unset');
                 }
             }
+            
             $this->render('index');
         }
         public function login() {
