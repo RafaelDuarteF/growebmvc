@@ -4,6 +4,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    background: #fff;
 }
 .navb{
     width: 70%;
@@ -101,4 +102,41 @@ li:hover, .logotipo-header:hover {
 }
 .menuUser:hover {
     cursor: pointer;
+}
+@media only screen and (max-width: 800px){
+    header, .navl {
+        flex-direction: column;
+        height: auto;
+        justify-content: center;
+        align-items: center;
+    }
+    .navl, .logotipo-header {
+        width: 100%;
+        margin: 0px;
+        text-align: center;
+    }
+    .logotipo-header {
+        margin-top: 20px;
+    }
+    .btnLogin, .imgPerfil {
+        margin: 0px;
+        margin-bottom: 20px;
+    }
+    .navl li {
+        margin-top: 10px;
+        margin: 0px;
+        margin-top: 6px;
+    }
+    .navl {
+        margin-bottom: 20px;
+        margin-top: 15px;
+        margin-left: 5px;
+    }
+    .menuUser {
+        top: 235px;
+        margin-right: 0px
+    }
+    .menuUser::before { 
+        right: 85px;
+    }
 }

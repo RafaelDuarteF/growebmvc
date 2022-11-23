@@ -49,7 +49,12 @@
                 'controller' => 'appController',
                 'action' => 'meuProjeto'
             );
-
+            $routes['urlinvalida'] = array(
+                'route' => '/urlInvalida',
+                'controller' => 'indexController',
+                'action' => 'urlInvalida'
+            );
+            
             $this->setRoutes($routes);
         }
     }

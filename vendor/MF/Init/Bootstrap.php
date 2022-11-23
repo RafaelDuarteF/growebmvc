@@ -29,7 +29,7 @@ abstract class Bootstrap {
             }
         }
         if($red == false) {
-            echo 'URL Inválida!';
+            header('Location: /urlInvalida');
         }
     }
     protected function getUrl() {

@@ -75,6 +75,10 @@
                 }
             }
         }
+        public function urlInvalida() {
+            $this->viewUsuario();
+            $this->render('urlInvalida');
+        }
     }
 
 ?>

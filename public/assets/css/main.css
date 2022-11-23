@@ -31,10 +31,16 @@ body * {
 }
 .content{
   width: 100vw;
-  height: calc(100vh - 50px);
-  background: #00ff88;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+.f {
+  width: 100vw;
+  height: calc(100vh - 90px);
+  background-color: #201b3c;
+}
+html {
+  background: #00ff88;
 }

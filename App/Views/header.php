@@ -9,25 +9,34 @@
         </ul>
     </nav>
     <?php
-    if($this->view->logado){
-    ?>
-        <div class="perfilUser">
-            <img class="imgPerfil" src="assets/img/default.png" />
-            <div class="menuUser">
-            <ul>
-                <li>Minha Conta</li>
-                <li onclick="redirect('/meuProjeto')">Meu Projeto</li>
-                <li id="sairPerfil" onclick="redirect('/sair')">SAIR</li>
-            </ul>
+    if(isset($this->view->logado)) {
+        if($this->view->logado){
+        ?>
+            <div class="perfilUser">
+                <img class="imgPerfil" src="assets/img/default.png" />
+                <div class="menuUser">
+                <ul>
+                    <li>Minha Conta</li>
+                    <li onclick="redirect('/meuProjeto')">Meu Projeto</li>
+                    <li id="sairPerfil" onclick="redirect('/sair')">SAIR</li>
+                </ul>
+            </div>
+        <?php
+        }
+        else{
+        ?>
+        <div class="btnLoginDiv">
+            <button class="btnLogin" onclick="redirect('/login')">Entrar</button>
         </div>
-    <?php
+        <?php
+        } 
     }
     else{
-    ?>
-    <div class="btnLoginDiv">
-        <button class="btnLogin" onclick="redirect('/login')">Entrar</button>
-    </div>
-    <?php
-    } 
+        ?>
+        <div class="btnLoginDiv">
+            <button class="btnLogin" onclick="redirect('/login')">Entrar</button>
+        </div>
+        <?php
+    }
     ?>
 </header>
