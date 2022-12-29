@@ -54,7 +54,21 @@
                 'controller' => 'indexController',
                 'action' => 'urlInvalida'
             );
-            
+            $routes['restaurar'] = array(
+                'route' => '/restaurar',
+                'controller' => 'indexController',
+                'action' => 'restaurarSenha'
+            );
+            $routes['validarEmail'] = array(
+                'route' => '/validarEmail',
+                'controller' => 'indexController',
+                'action' => 'validarEmail'
+            );
+            $routes['enviarRestauracao'] = array(
+                'route' => '/enviarRestauracao',
+                'controller' => 'indexController',
+                'action' => 'enviarRestauracao'
+            );
             $this->setRoutes($routes);
         }
     }

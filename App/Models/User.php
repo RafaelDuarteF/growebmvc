@@ -92,7 +92,19 @@
                 return true;
             }
             return false;
-
+        }
+        public function validarEmail() {
+            $query = "SELECT count(nomeUser) as quantEmail FROM user WHERE email = :email";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindValue(':email', $this->__get('email'));
+            $stmt->execute();
+            $countUser = $stmt->fetch(\PDO::FETCH_ASSOC);
+            if($countUser['quantEmail'] > 0) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
     }
 

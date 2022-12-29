@@ -26,6 +26,26 @@ function validarUsuario() {
     }
 }
 
+function requisicaoEmail() {
+    email = document.querySelector("#inputResSenha").value;
+    $.ajax({
+        type: 'POST',
+        url: '/validarEmail',
+        data: `email=${email}`,
+        dataType: 'json',
+        success: cb => {validarEmail(cb)},
+        error: error => {validarEmail('erro')}
+    });
+    function validarEmail(cb) {
+        if(cb == 1) {
+            document.getElementById("formResSenha").submit();
+        }
+        else {
+            swal('E-Mail inválido!', 'O seu e-mail não corresponde em nossa base de dados, verifique novamente.', 'error');
+        }
+    }
+}
+
 function requisicaoUsername(tipRetorno) {
     userDigitado = document.querySelector("#username").value;
     $.ajax({

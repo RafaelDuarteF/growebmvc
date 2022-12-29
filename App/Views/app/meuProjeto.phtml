@@ -16,6 +16,14 @@
                 <?php
             }
         ?>
+            <div class="atProj">
+                <h3 class="titleMProjeto">Andamento de projeto</h3>
+                <p class="infosMProjeto">Situação: <?php echo $this->view->dadosProj['situacao']; ?></p>    
+                <p class="infosMProjeto">Previsão: <?php echo $this->view->dadosProj['previsao']; ?></p>  
+                <p class="infosMProjeto">Atualização: <?php echo $this->view->dadosProj['atualizacao']; ?></p>  
+                <p class="infosMProjeto">Data de atualização: <?php echo str_replace('-', '/', date('d-m-Y', strtotime($this->view->dadosProj['dataAt']))); ?></p>    
+                <p class="infosMProjeto">Imagens: <?php echo $this->view->dadosProj['imagens']; ?></p>    
+            </div>
         </div>
         <div class="direitosPlano">
             <div class="infoDireitosPlano">
@@ -23,5 +31,5 @@
                 <p></p>
             </div>
         </div>
-    </div>
+    </div>  
 </div>

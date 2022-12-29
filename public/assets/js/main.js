@@ -84,4 +84,13 @@ $(document).ready(function(){
             requisicaoUsername('enviado');
         }
     });
+    $(".envResSenha").click(() => {
+        emailRes = document.getElementById("inputResSenha").value;
+        if(emailRes.length == 0) {
+            swal("Campo vazio!", "Preencha o campo com o seu e-mail.", "error");
+        }
+        else {
+            requisicaoEmail();
+        }
+    });
 });

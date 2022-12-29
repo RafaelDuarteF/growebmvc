@@ -40,7 +40,12 @@ body * {
   width: 100vw;
   height: calc(100vh - 90px);
   background-color: #201b3c;
-}
+} /* FUNDO COM HEADER */
+.fsh {
+  width: 100vw;
+  height: 100vh;
+  background-color: #201b3c;
+} /* FUNDO SEM HEADER */
 html {
   background: #00ff88;
 }

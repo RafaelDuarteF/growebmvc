@@ -75,10 +75,43 @@
                 }
             }
         }
+        public function restaurarSenha() {
+            $this->render('restaurarSenha', 'layoutNHeader');
+        }
         public function urlInvalida() {
             $this->viewUsuario();
             $this->render('urlInvalida');
         }
+        public function validarEmail() {
+            $email = $_POST['email'];
+            if(!empty($email)) {
+                $usuario = Conteiner::getModel('User');
+                $usuario->__set('email', $email);
+                $validar = $usuario->validarEmail();
+                if($validar == true) {
+                    $retorno = 1;
+                }
+                else {
+                    $retorno = 0;
+                }
+            }
+            else {
+                $retorno = 0;
+            }
+            echo json_encode($retorno);
+        }
+        public function enviarRestauracao() {
+            $email = $_POST['emailRes'];
+            if(!empty($email)) {
+                $cod = rand(10000, 99999);
+                $usuario = Conteiner::getModel('User');
+                $usuario->__set('email', $email);
+                $vEmail = $usuario->validarEmail();
+                if($vEmail == true) {
+                    $statusEmail = $this->enviarEmailRec($usuario->__get('email'), $cod);
+                }
+            }
+        }
     }
 
-?>
+?> 

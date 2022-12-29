@@ -6,6 +6,10 @@
 .titleProjeto {
     color: white;
 }
+.titleMProjeto {
+    margin-top: 50px;
+    color: white;
+}
 .projeto {
     height: 100%;
     display: flex;
@@ -14,6 +18,9 @@
     margin-left: 40px;
     margin-top: 70px;
     width: 50%;
+}
+.infosMProjeto {
+    color: gainsboro;
 }
 .infosProjetoText {
     color: gainsboro;

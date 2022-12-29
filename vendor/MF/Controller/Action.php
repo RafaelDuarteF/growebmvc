@@ -3,6 +3,7 @@
     namespace MF\Controller;
     use MF\Model\Conteiner;
     use MF\phpmailer\Mensagem;
+    use MF\phpmailer\MensagemRec;
     abstract class Action {
         protected $view;
         public function __construct() {
@@ -63,6 +64,13 @@
             $mensagem = new Mensagem();
             $mensagem->__set('nome', $para);
             $mensagem->__set('destino', $email);
+            $statusEnvio = $mensagem->enviarEmail();
+            return $statusEnvio;
+        }
+        protected function enviarEmailRec($email, $cod) {
+            $mensagem = new MensagemRec();
+            $mensagem->__set('destino', $email);
+            $mensagem->__set('cod', $cod);
             $statusEnvio = $mensagem->enviarEmail();
             return $statusEnvio;
         }

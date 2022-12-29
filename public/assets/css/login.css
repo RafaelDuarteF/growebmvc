@@ -46,6 +46,14 @@
     text-decoration: underline;
     margin-top: 20px;
 }
+.redRes {
+    color: gainsboro;
+    margin: 0px;
+    margin-bottom: 15px;
+}
+.redRes:hover {
+    opacity: 50%;
+}
 .redCad:hover {
     cursor: pointer;
     opacity: 70%;
