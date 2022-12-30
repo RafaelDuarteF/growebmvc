@@ -2,9 +2,9 @@
     <div class="cardResSenha">
         <h3 class="titleResSenha">Recuperar senha</h3>
         <form id="formResSenha" action="/enviarRestauracao" method="POST">
-            <label class="lblResSenha">Digite seu email: </label><br>
-            <input class="inputResSenha" name="emailRes" id="inputResSenha" type="text"/><br>
-            <button class="envResSenha" type="button">Enviar</button>
+            <label for="inputResSenha" class="lblResSenha">Digite o email da conta que deseja recuperar: </label><br>
+            <input class="inputResSenha" name="emailRes" placeholder="email.email@provedor.com" id="inputResSenha" type="text"/><br>
+            <button class="envResSenha" id="envResSenhaEm" type="button">Enviar</button>
         </form>
     </div>
 </div>

@@ -33,6 +33,28 @@
             $this->setCookieLogin('unset');
             header("Location: ".$_SERVER['HTTP_REFERER']."");
         }
+        function logarRes() {
+            session_start();
+            $codDigitado = isset($_POST['cod']) ? $_POST['cod'] : '';
+            if($codDigitado == $_SESSION['cod']) {
+                if(!empty($_SESSION['emailRec'])) {
+                    $usuario = Conteiner::getModel('User');
+                    $usuario->__set("email", $_SESSION['emailRec']); 
+                    $usuario->restaurarConta();
+                    $_SESSION['nome'] = $usuario->__get("nome");
+                    $_SESSION['email'] = $usuario->__get("email");
+                    $_SESSION['telefone'] = $usuario->__get("telefone");
+                    $_SESSION['emailRec'] = '';
+                    echo json_encode(true);
+                }
+                else{
+                    echo json_encode('emailInv');
+                }
+            }
+            else {
+                echo json_encode('codInv');
+            }
+        }
     }
 
 ?>

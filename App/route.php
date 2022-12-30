@@ -69,6 +69,11 @@
                 'controller' => 'indexController',
                 'action' => 'enviarRestauracao'
             );
+            $routes['logarRes'] = array(
+                'route' => '/logarRes',
+                'controller' => 'authController',
+                'action' => 'logarRes'
+            );
             $this->setRoutes($routes);
         }
     }

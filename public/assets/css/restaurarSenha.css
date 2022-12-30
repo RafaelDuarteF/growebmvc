@@ -19,7 +19,7 @@
 }
 .titleResSenha {
     color: white;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 .lblResSenha {
     color: gainsboro;
@@ -50,9 +50,12 @@
     background: #00ff88;
     cursor: pointer;
     box-shadow: 0px 10px 40px -12px #00ff8852;
-
 }
-#formResSenha {
+.legResSenha {
+    color: gainsboro;
+    margin-bottom: 30px;
+}
+#formResSenha, #formResSenhaCod {
     display: flex;
     justify-content: center;
     align-items: center;

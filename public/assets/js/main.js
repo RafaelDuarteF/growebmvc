@@ -84,13 +84,22 @@ $(document).ready(function(){
             requisicaoUsername('enviado');
         }
     });
-    $(".envResSenha").click(() => {
+    $("#envResSenhaEm").click(() => {
         emailRes = document.getElementById("inputResSenha").value;
         if(emailRes.length == 0) {
             swal("Campo vazio!", "Preencha o campo com o seu e-mail.", "error");
         }
         else {
             requisicaoEmail();
+        }
+    });
+    $("#envResSenhaCod").click(() => {
+        codRes = document.getElementById("inputResSenhaCod").value;
+        if(codRes.length < 5) {
+            swal("Código inválido.", "O código deve possuir cinco dígitos!", "warning");
+        }
+        else {
+            logarComCodigo(codRes);
         }
     });
 });

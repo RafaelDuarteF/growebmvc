@@ -106,6 +106,16 @@
                 return false;
             }
         }
+        public function restaurarConta() {
+            $query = "SELECT nomeUser, email, telefone FROM user WHERE email = :email";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindValue(":email", $this->__get("email"));
+            $stmt->execute();
+            $usuario = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $this->__set("nome", $usuario['nomeUser']);
+            $this->__set("email", $usuario['email']);
+            $this->__set("telefone", $usuario['telefone']);
+        }
     }
 
 ?>

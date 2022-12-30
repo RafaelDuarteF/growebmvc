@@ -101,16 +101,37 @@
             echo json_encode($retorno);
         }
         public function enviarRestauracao() {
-            $email = $_POST['emailRes'];
+            session_start();
+            $email = isset($_POST['emailRes']) ? $_POST['emailRes'] : '';
             if(!empty($email)) {
-                $cod = rand(10000, 99999);
+                if(isset($_SESSION['cod'])) {
+                    $cod = $_SESSION['cod'];
+                }
+                else {
+                    $cod = rand(10000, 99999);
+                    $_SESSION['cod'] = $cod;
+                }
+                $_SESSION['emailRec'] = $email;
                 $usuario = Conteiner::getModel('User');
                 $usuario->__set('email', $email);
                 $vEmail = $usuario->validarEmail();
                 if($vEmail == true) {
                     $statusEmail = $this->enviarEmailRec($usuario->__get('email'), $cod);
+                    if($statusEmail == true) {
+                        $this->view->emailRec = $email;
+                    }
+                    else {
+                        header("location:/restaurarSenha?erroEmailIn");
+                    }
+                }
+                else {
+                    header("location:/restaurarSenha?erroEmailInBD");
                 }
             }
+            else {
+                header('location:/restaurar');
+            }
+            $this->render("enviarRestauracao", "layoutNHeader");
         }
     }
 

@@ -93,3 +93,29 @@ function requisicaoUsername(tipRetorno) {
         }
     }
 }
+function logarComCodigo(codRes) {
+    $.ajax({
+        type: 'POST',
+        url: '/logarRes',
+        data: `cod=${codRes}`,
+        dataType: 'json',
+        success: cb => {
+            verificarLogin(cb);
+        },
+        error: erro => {verificarLogin('erro')}
+    });
+    function verificarLogin(cb) {
+        if(cb == true) {
+            location.assign("/");
+        }
+        else if(cb == 'emailInv') {
+            swal("Ocorreu um erro.", "O e-mail informado é inválido!", "error");
+        }
+        else if(cb == 'codInv') {
+            swal("Ocorreu um erro.", "O código informado é inválido!", "error");
+        }
+        else{
+            swal("Ocorreu um erro.", "Ocorreu um erro ao tentar logar, tente novamente mais tarde.", "error");
+        }
+    }
+}
