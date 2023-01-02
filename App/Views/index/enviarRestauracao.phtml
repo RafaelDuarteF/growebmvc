@@ -2,7 +2,7 @@
     <div class="cardResSenha">
         <h3 class="titleResSenha">Informe o código</h3>
         <p class="legResSenha">Informe o código de 5 dígitos enviado ao e-mail <a><?php echo $this->view->emailRec; ?></a> para acessar a sua conta e realizar a troca de senha.</p>
-        <form id="formResSenhaCod" action="/logarRes method="POST">
+        <form id="formResSenhaCod" onsubmit="contEnvio(i)" method="POST">
             <label for="inputResSenhaCod" class="lblResSenha">Digite o código: </label><br>
             <input class="inputResSenha" max="5" oninput="mascaraCodigo(this)" name="codRes" id="inputResSenhaCod" type="text"/><br>
             <button class="envResSenha" id="envResSenhaCod" type="button">Enviar</button>
@@ -18,5 +18,8 @@
             }
             
         i.setAttribute("maxlength", "5");
+    }
+    function contEnvio(i) {
+        i.preventDefault();
     }
 </script>
