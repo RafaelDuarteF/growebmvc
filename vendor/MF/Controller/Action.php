@@ -45,6 +45,7 @@
                     'nome' => $_SESSION['nome'],
                     'email' => $_SESSION['email'],
                     'telefone' => $_SESSION['telefone'],
+                    'id' => $_SESSION['id'],
                     'cookiesLogin' => isset($_SESSION['cookiesLogin']) ? $_SESSION['cookiesLogin'] : false
                 );
             }

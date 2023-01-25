@@ -42,7 +42,7 @@
                             <label for="telefone"><b>Telefone:</b></label><br>
                             <input class="inputCad" type="text" value="<?= $telIn; ?>" placeholder="Ex: (11) 941232313" oninput="mascaraTel(this)" name="telefone" id="telefone"/><br>
                             <label for="email"><b>E-Mail:</b></label><br>
-                            <input class="inputCad" type="email" value="<?= $emailIn; ?>" placeholder="Ex: rafaeldd@seuemail.com" name="email" id="email"/><br>
+                            <input class="inputCad" title="Certifique-se de usar um E-Mail que você possui acesso!" type="email" value="<?= $emailIn; ?>" placeholder="Ex: rafaeldd@seuemail.com" name="email" id="email"/><br>
                         </div>
                     </div>
                     <input type="checkbox" name="termsCk" id="termsCk"><label class="lblTerms" for="termsCk">Eu aceito os <a>Termos de Serviço</a> e a <a>Política de Privacidade</a> da Groweb</label>
@@ -60,6 +60,8 @@
                 i.value = v.substring(0, v.length-1);
                 return;
             }
-            i.setAttribute("maxlength", "5");
+            i.setAttribute("maxlength", "14");
+            if(v.length == 1) { i.value = "(" + v; }
+            if(v.length == 3) { i.value = v + ")" + " "; }
         }
     </script>

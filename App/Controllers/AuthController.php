@@ -7,11 +7,11 @@
     class AuthController extends Action {
         function logar() {
             $usuario = Conteiner::getModel('User');
-            $nome = isset($_POST['usuario']) ? $_POST['usuario'] : '';
+            $email = isset($_POST['email']) ? $_POST['email'] : '';
             $senha = isset($_POST['senha']) ? $_POST['senha'] : '';
             $cbConect = isset($_POST['cbConect']) ? $_POST['cbConect'] : false;
             $cbConect = $cbConect === 'true' ? true : false;
-            $usuario->__set('nome', $nome);
+            $usuario->__set('email', $email);
             $usuario->__set('senha', $senha);
             $usuario->__set('cbConect', $cbConect);
             $usuario->validarUsuario();
@@ -21,6 +21,7 @@
                 $_SESSION['telefone'] = $usuario->__get('telefone');
                 $_SESSION['email'] = $usuario->__get('email');
                 $_SESSION['cookiesLogin'] = $usuario->__get('cbConect');
+                $_SESSION['id'] = $usuario->__get('id');
                 echo json_encode(true);
             }
             else {
@@ -44,6 +45,7 @@
                     $_SESSION['nome'] = $usuario->__get("nome");
                     $_SESSION['email'] = $usuario->__get("email");
                     $_SESSION['telefone'] = $usuario->__get("telefone");
+                    $_SESSION['id'] = $usuario->__get('id');
                     $_SESSION['emailRec'] = '';
                     echo json_encode(true);
                 }

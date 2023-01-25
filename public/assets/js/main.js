@@ -56,7 +56,8 @@ $(document).ready(function(){
     });
 
     $('#username').on('input', () => { // Valida o username de usuário ao digitá-lo no formulário de cadastro
-        requisicaoUsername('digitado');
+        nome = document.getElementById('username').value;
+        requisicaoUsername('digitado', nome);
     });
 
     $(".btnCad").click(() => { // Valida o username de usuário ao enviá-lo no formulário de cadastro
@@ -101,5 +102,9 @@ $(document).ready(function(){
         else {
             logarComCodigo(codRes);
         }
+    });
+    $("#nomeAt").on('input', () => {
+        nome = document.getElementById('nomeAt').value;
+        requisicaoUsername('digitado', nome)
     });
 });

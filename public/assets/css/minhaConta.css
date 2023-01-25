@@ -1,0 +1,43 @@
+.minhaConta, .perfil {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.infosConta {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.titleMConta {
+    color: white;
+    margin-top: 40px;
+}
+.imgConta {
+    width: 150px;
+    height: 150px;
+    padding: 3px;
+    margin: 0px;
+    border-radius: 77px;
+    border: 3px solid #fff;
+}
+.infoConta {
+    color: gainsboro;
+    font-size: 23px;
+    margin: 10px 0px;
+}
+.nomeConta {
+    margin-top: 30px;
+}
+.alterarDados {
+    background-color: #00ff88;
+    border: 0px;
+    width: 200px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 13pt;
+    margin-top: 30px;
+}
+.alterarDados:hover {
+    opacity: 70%;
+    cursor: pointer;
+}

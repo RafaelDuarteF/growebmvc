@@ -16,7 +16,7 @@
                 <img class="imgPerfil" src="assets/img/default.png" />
                 <div class="menuUser">
                 <ul>
-                    <li>Minha Conta</li>
+                    <li onclick="redirect('/minhaConta')">Minha Conta</li>
                     <li onclick="redirect('/meuProjeto')">Meu Projeto</li>
                     <li id="sairPerfil" onclick="redirect('/sair')">SAIR</li>
                 </ul>

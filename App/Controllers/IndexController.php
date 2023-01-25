@@ -41,12 +41,26 @@
             $this->render('cadastro', 'layoutNHeader');
         }
         public function verificarUsername() {
+            session_start();
             $username = isset($_POST['nome']) ? $_POST['nome'] : '';
             if(!empty($username)) {
-                $usuario = Conteiner::getModel('User');
-                $usuario->__set('nome', $username);
-                $countUsername = $usuario->existsUsername();
-                echo json_encode($countUsername);
+                if(isset($_SESSION['nome'])) {
+                    if($username == $_SESSION['nome']) { 
+                        echo json_encode('equal');
+                    }
+                    else {
+                        $usuario = Conteiner::getModel('User');
+                        $usuario->__set('nome', $username);
+                        $countUsername = $usuario->existsUsername();
+                        echo json_encode($countUsername);
+                    }
+                }
+                else {
+                    $usuario = Conteiner::getModel('User');
+                    $usuario->__set('nome', $username);
+                    $countUsername = $usuario->existsUsername();
+                    echo json_encode($countUsername);
+                }
             }
         }
         public function cadastrarUsuario() {

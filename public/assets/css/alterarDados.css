@@ -1,0 +1,57 @@
+.alterarDados, .atDados {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.cardAtDados {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 35px 35px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    background: #2f2841;
+    border-radius: 20px;
+    box-shadow: 0px 10px 40px #00000056;
+}
+.titleAtDados {
+    color: white;
+    margin-bottom: 25px;
+}
+.tipAt {
+    color: gainsboro;
+    padding: 0px;
+}
+.inputAtDados {
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    width: 100%;
+    background: #514869;
+    color: #f0ffffde;
+    font-size: 12pt;
+    margin-bottom: 20px;
+    box-shadow: 0px 10px 40px #00000056;
+    outline: none;
+    box-sizing: border-box;
+}
+.btnAtDados {
+    background-color: #00ff88;
+    font-size: 15pt;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    height: 45px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+#formAtDados {
+    width: 70%;
+}
+.btnAtDados:hover {
+    cursor: pointer;
+    opacity: 70%;
+}

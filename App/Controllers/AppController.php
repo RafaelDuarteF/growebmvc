@@ -9,7 +9,7 @@
             $this->viewUsuario();
             if($this->view->logado == true) {
                 $projeto = Conteiner::getModel('plano_user');
-                $projeto->__set('nomeUser', $this->view->usuario['nome']);
+                $projeto->__set('idUser', $this->view->usuario['id']);
                 $meuProjeto = $projeto->verificarProjetos();
                 if($meuProjeto != false) {
                     $this->view->projeto = array(
@@ -19,7 +19,7 @@
                         'descricaoPlano' => $meuProjeto['descricaoPlano']
                     );
                     $proj = Conteiner::getModel('projeto');
-                    $proj->__set('nome', $this->view->usuario['nome']);
+                    $proj->__set('idUser', $this->view->usuario['id']);
                     $dadosProj = $proj->retornarProjeto();
                     $this->view->dadosProj = array(
                         'situacao' => $dadosProj['situacao'],
@@ -36,6 +36,24 @@
             }
             else {
                 header('Location: /?erroAutenticacao=true');
+            }
+        }
+        public function minhaConta() {
+            $this->viewUsuario();
+            if($this->view->logado == true) {
+                $this->render('minhaConta');
+            }
+            else {
+                header('location: /?erroAutenticacao=true');
+            }
+        }
+        public function alterarDados() {
+            $this->viewUsuario();
+            if($this->view->logado == true) {
+                $this->render('alterarDados', 'layoutNHeader');
+            }
+            else {
+                header('location: /?erroAutenticacao=true');
             }
         }
     }

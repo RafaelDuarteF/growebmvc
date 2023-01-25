@@ -74,6 +74,17 @@
                 'controller' => 'authController',
                 'action' => 'logarRes'
             );
+            $routes['minhaConta'] = array(
+                'route' => '/minhaConta',
+                'controller' => 'appController',
+                'action' => 'minhaConta'
+            );
+            $routes['alterarDados'] = array(
+                'route' => '/alterarDados',
+                'controller' => 'appController',
+                'action' => 'alterarDados'
+            );
+            
             $this->setRoutes($routes);
         }
     }

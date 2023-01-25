@@ -6,6 +6,7 @@
         private $email;
         private $senha;
         private $telefone;
+        private $id;
         private $userValido = false;
         private $cbConect;
 
@@ -16,16 +17,17 @@
             $this->$attr = $value;
         }
         public function validarUsuario() {
-            $query = "SELECT nomeUser, email, telefone FROM user WHERE nomeUser = :nome and senha = :senha";
+            $query = "SELECT nomeUser, email, telefone, id FROM user WHERE email = :email and senha = :senha";
             $stmt = $this->db->prepare($query);
-            $stmt->bindValue(':nome', $this->__get('nome'));
+            $stmt->bindValue(':email', $this->__get('email'));
             $stmt->bindValue(':senha', md5($this->__get('senha')));
             $stmt->execute();
             $usuarioV = $stmt->fetch(\PDO::FETCH_ASSOC);
-            if(!empty($usuarioV['nomeUser']) && !empty($usuarioV['email']) && !empty($usuarioV['telefone'])) {
+            if(!empty($usuarioV['nomeUser']) && !empty($usuarioV['email']) && !empty($usuarioV['telefone']) && !empty($usuarioV['id'])) {
                 $this->__set('nome', $usuarioV['nomeUser']);
                 $this->__set('email', $usuarioV['email']);
                 $this->__set('telefone', $usuarioV['telefone']);
+                $this->__set('id', $usuarioV['id']);
                 $this->__set('userValido', true);
             }
             else {
@@ -47,7 +49,8 @@
         }
         public function validarCadastro() {
             $usernameValidate = $this->existsUsername();
-            if(!$usernameValidate) {
+            $emailValidate = $this->validarEmail();
+            if(!$usernameValidate && !$emailValidate) {
                 if(strlen($this->__get('senha')) < 8 || strlen($this->__get('telefone')) < 11) {
                     return false;
                 }
@@ -58,6 +61,15 @@
             else {
                 return false;
             }
+        }
+        public function getID() {
+            $query = "SELECT id FROM user WHERE nomeUser = :nome AND email = :email";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindValue(':nome', $this->__get('nome'));
+            $stmt->bindValue(':email', $this->__get('email'));
+            $stmt->execute();
+            $stmt = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $this->__set('id', $stmt['id']);
         }
         public function salvar() {
             try {
@@ -73,6 +85,8 @@
                 $_SESSION['telefone'] = $this->__get('telefone');
                 $_SESSION['email'] = $this->__get('email');
                 $_SESSION['cookiesLogin'] = false;
+                $this->getID();
+                $_SESSION['id'] = $this->__get('id');
                header("Location: /");
             } catch(\PDOException $e) {
                 header("Location: /?erroCadastro=true");
@@ -107,7 +121,7 @@
             }
         }
         public function restaurarConta() {
-            $query = "SELECT nomeUser, email, telefone FROM user WHERE email = :email";
+            $query = "SELECT nomeUser, email, telefone, id FROM user WHERE email = :email";
             $stmt = $this->db->prepare($query);
             $stmt->bindValue(":email", $this->__get("email"));
             $stmt->execute();
@@ -115,6 +129,7 @@
             $this->__set("nome", $usuario['nomeUser']);
             $this->__set("email", $usuario['email']);
             $this->__set("telefone", $usuario['telefone']);
+            $this->__set("id", $usuario['id']);
         }
     }
 

@@ -1,11 +1,11 @@
 function validarUsuario() {
-    nome = document.querySelector("#usuarioIn").value;
+    email = document.querySelector("#emailIn").value;
     senha = document.querySelector("#senhaIn").value;
     cbConect = document.querySelector("#cbConectIn").checked;
     $.ajax({
         type: 'POST',
         url: '/logar',
-        data: `usuario=${nome}&senha=${senha}&cbConect=${cbConect}`,
+        data: `email=${email}&senha=${senha}&cbConect=${cbConect}`,
         dataType: 'json',
         success: cb => {retorno(cb)},
         error: erro => {retorno('erro')}
@@ -15,7 +15,7 @@ function validarUsuario() {
             location.assign('/');
         }
         else if(cb == false) {
-            swal('Usuário ou senha incorretos', 'Nome de usuário ou senha informadas são inválidas!', 'warning');
+            swal('E-Mail ou senha incorretos', 'Endereço de E-Mail ou senha informadas são inválidas!', 'warning');
         }
         else if(cb == 'erro') {
             swal('Algo deu errado', 'Por favor, tente novamente', 'warning');
@@ -46,12 +46,11 @@ function requisicaoEmail() {
     }
 }
 
-function requisicaoUsername(tipRetorno) {
-    userDigitado = document.querySelector("#username").value;
+function requisicaoUsername(tipRetorno, username) {
     $.ajax({
         type: 'POST',
         url: '/verificarUsername',
-        data: `nome=${userDigitado}`,
+        data: `nome=${username}`,
         dataType: 'json',
         success: cb => {
             if(tipRetorno == 'digitado') {
@@ -64,11 +63,11 @@ function requisicaoUsername(tipRetorno) {
         error: erro => {validarUserDigitado('erro')}
     });
     function validarUserDigitado(cb) {
-        if(userDigitado.length == 0) {
+        if(username.length == 0) {
             $(".statusNome").text('');
         }
         else {
-            if(cb) {
+            if(cb == true) {
                 $(".statusNome").text("Inválido");
                 $(".statusNome").css("color", "red");
             }
@@ -83,7 +82,23 @@ function requisicaoUsername(tipRetorno) {
     }
     function validarUserEnviado(cb) {
         if(cb == false){
-            document.getElementById("cadFm").submit();
+            email = document.getElementById("email").value;
+            $.ajax({
+                type: 'POST',
+                url: '/validarEmail',
+                data: `email=${email}`,
+                dataType: 'json',
+                success: cb => { validarEmail(cb); },
+                error: erro => {validarEmail('erro')},
+            });
+            function validarEmail(cb) {
+                if(cb == 0) {
+                    document.getElementById("cadFm").submit();
+                }
+                else {
+                    swal('E-Mail inválido!', 'O seu e-mail já corresponde em nossa base de dados, tente logar com ele, ou cadastre outro.', 'error');
+                }
+            }
         }
         else if(cb){
             swal("Usuário inválido!", "O nome de usuário inserido já existe. Por favor, informe outro.", "warning");

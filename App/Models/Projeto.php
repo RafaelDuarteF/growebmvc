@@ -7,6 +7,7 @@
         private $previsaoEntrega;
         private $atualizacao;
         private $path;
+        private $idUser;
         private $codProjeto;
         private $dataAtualizacao;
 
@@ -17,9 +18,9 @@
             $this->attr = $value;
         }
         public function retornarProjeto () {
-            $query = "SELECT * FROM projeto WHERE nomeUser = :nome";
+            $query = "SELECT * FROM projeto WHERE idUser = :id";
             $stmt = $this->db->prepare($query);
-            $stmt->bindValue(':nome', $this->__get('nome'));
+            $stmt->bindValue(':id', $this->__get('idUser'));
             $stmt->execute();
             $infosProj = $stmt->fetch(\PDO::FETCH_ASSOC);
             return $infosProj;
