@@ -131,6 +131,31 @@
             $this->__set("telefone", $usuario['telefone']);
             $this->__set("id", $usuario['id']);
         }
+        public function validarSenha() {
+            $query = "SELECT senha FROM user WHERE id = :id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindValue(':id', $this->__get('id'));
+            $stmt->execute();
+            $stmt = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $senha = $stmt['senha'];
+            return $senha;
+        }
+        public function alterarDados() {
+            try {
+                $query = "UPDATE user SET nomeUser = :novoNome, senha = :novaSenha, telefone = :novoTelefone, email = :novoEmail WHERE id = :id";
+                $stmt = $this->db->prepare($query);
+                $stmt->bindValue(':novoNome', $this->__get('nome'));
+                $stmt->bindValue(':novaSenha', $this->__get('senha'));
+                $stmt->bindValue(':novoTelefone', $this->__get('telefone'));
+                $stmt->bindValue(':novoEmail', $this->__get('email'));
+                $stmt->bindValue(':id', $this->__get('id'));
+                $stmt->execute();
+                return 1;
+            }
+            catch (\PDOException $e) {
+                return 0;
+            }
+        }
     }
 
 ?>

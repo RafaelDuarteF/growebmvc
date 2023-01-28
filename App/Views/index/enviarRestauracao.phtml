@@ -4,7 +4,14 @@
         <p class="legResSenha">Informe o código de 5 dígitos enviado ao e-mail <a><?php echo $this->view->emailRec; ?></a> para acessar a sua conta e realizar a troca de senha.</p>
         <form id="formResSenhaCod" onsubmit="contEnvio(i)" method="POST">
             <label for="inputResSenhaCod" class="lblResSenha">Digite o código: </label><br>
-            <input class="inputResSenha" max="5" oninput="mascaraCodigo(this)" name="codRes" id="inputResSenhaCod" type="text"/><br>
+            <div class="codsSenha">
+                <input class="inputResSenha" max="1" autofocus oninput="mascaraCodigo(this)" name="codRes1" id="inputResSenhaCod1" type="text"/>
+                <input class="inputResSenha" max="1" oninput="mascaraCodigo(this)" name="codRes2" id="inputResSenhaCod2" type="text"/>
+                <input class="inputResSenha" max="1" oninput="mascaraCodigo(this)" name="codRes3" id="inputResSenhaCod3" type="text"/>
+                <input class="inputResSenha" max="1" oninput="mascaraCodigo(this)" name="codRes4" id="inputResSenhaCod4" type="text"/>
+                <input class="inputResSenha" max="1" oninput="mascaraCodigo(this)" name="codRes5" id="inputResSenhaCod5" type="text"/>
+            </div>
+            <br><br>
             <button class="envResSenha" id="envResSenhaCod" type="button">Enviar</button>
         </form>
     </div>
@@ -12,12 +19,32 @@
 <script>
     function mascaraCodigo(i) {
         var v = i.value;
+        var id = i.id;
         if(isNaN(v[v.length-1])){ // impede entrar outro caractere que não seja número
-                i.value = v.substring(0, v.length-1);
-                return;
+            i.value = v.substring(0, v.length-1);
+            return;
+        }
+        if(v.length == 5 && id.slice(-1) == '1') {
+            v2 = v.substring(1,2)
+            v3 = v.substring(2,3);
+            v4 = v.substring(3,4);
+            v5 = v.substring(4,5);
+            i.value = v.substring(0, 1);
+            $("#inputResSenhaCod2").attr('value', v2);
+            $("#inputResSenhaCod3").attr('value', v3);
+            $("#inputResSenhaCod4").attr('value', v4);
+            $("#inputResSenhaCod5").attr('value', v5);
+            $("#inputResSenhaCod5").focus();
+        }
+        else {
+            i.value = v.substring(0, 1)
+        }
+        i.setAttribute("maxlength", "1");
+        if(parseInt(id.slice(-1)) < 6) {
+            if(v.length > 0) {
+                $("#inputResSenhaCod" + (parseInt(id.slice(-1)) + 1)).focus();
             }
-            
-        i.setAttribute("maxlength", "5");
+        }
     }
     function contEnvio(i) {
         i.preventDefault();

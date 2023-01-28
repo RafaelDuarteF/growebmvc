@@ -35,9 +35,9 @@
 
                 //Content
                 $mail->isHTML(true);                                  //Set email format to HTML
-                $mail->Subject = 'Recuperacao de senha';
-                $mail->Body    = 'Ola, vimos que voce esqueceu a sua senha. Use essa senha temporaria abaixo para acessar a sua conta e realizar a troca: <br><br><h1>' . $this->__get('cod') . '</h1>';
-                $mail->AltBody = 'Ola, vimos que voce esqueceu a sua senha. Use essa senha temporaria abaixo para acessar a sua conta e realizar a troca: <br><br><h1>' . $this->__get('cod') . '</h1>';
+                $mail->Subject = utf8_decode('Recuperação de senha Groweb.');
+                $mail->Body    = utf8_decode('<p>Olá, você solicitou uma recuperação de senha de acesso ao Groweb? Utilize a senha temporária abaixo para acessar sua conta e realizar a troca (use ela como sua senha antiga ao alterar dados): </p><br><h1>' . $this->__get('cod') . '</h1>');
+                $mail->AltBody = utf8_decode('<p>Olá, você solicitou uma recuperação de senha de acesso ao Groweb? Utilize a senha temporária abaixo para acessar sua conta e realizar a troca (use ela como sua senha antiga ao alterar dados): </p><br><h1>' . $this->__get('cod') . '</h1>');
 
                 $mail->send();
                 return true;

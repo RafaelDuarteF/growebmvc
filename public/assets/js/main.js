@@ -86,7 +86,7 @@ $(document).ready(function(){
         }
     });
     $("#envResSenhaEm").click(() => {
-        emailRes = document.getElementById("inputResSenha").value;
+        emailRes = document.getElementById("inputResEm").value;
         if(emailRes.length == 0) {
             swal("Campo vazio!", "Preencha o campo com o seu e-mail.", "error");
         }
@@ -95,11 +95,16 @@ $(document).ready(function(){
         }
     });
     $("#envResSenhaCod").click(() => {
-        codRes = document.getElementById("inputResSenhaCod").value;
-        if(codRes.length < 5) {
+        codRes1 = document.getElementById("inputResSenhaCod1").value;
+        codRes2 = document.getElementById("inputResSenhaCod2").value;
+        codRes3 = document.getElementById("inputResSenhaCod3").value;
+        codRes4 = document.getElementById("inputResSenhaCod4").value;
+        codRes5 = document.getElementById("inputResSenhaCod5").value;
+        if(codRes1.length < 1 || codRes2.length < 1 || codRes3.length < 1 || codRes4.length < 1 || codRes5.length < 1) {
             swal("Código inválido.", "O código deve possuir cinco dígitos!", "warning");
         }
         else {
+            codRes = '' + codRes1 + codRes2 + codRes3 + codRes4 + codRes5;
             logarComCodigo(codRes);
         }
     });
@@ -107,4 +112,30 @@ $(document).ready(function(){
         nome = document.getElementById('nomeAt').value;
         requisicaoUsername('digitado', nome)
     });
+    $("#emailAt").on('input', () => {
+        email = document.getElementById('emailAt').value;
+        requisicaoEmailAt(email);
+    });
+    $(".btnAtDados").on('click', () => {
+        user = document.getElementById("nomeAt").value;
+        pass = document.getElementById("senhaAt").value;
+        tel = document.getElementById("telAt").value;
+        email = document.getElementById("emailAt").value;
+        passAnt = document.getElementById("senhaAtAnt").value;
+        if(user.length == 0 || pass.length == 0 || tel.length == 0 || email.length == 0 || passAnt.length == 0){
+            swal("Faltam informações!", "Há informações não preenchidas.", "error");
+        }
+        else if(user.length < 4){
+            swal("Nome de usuário inválido!", "O seu nome de usuário é muito pequeno. Por favor, informe outro.", "error");
+        }
+        else if(pass.length < 8){
+            swal("Senha inválida!", "Insira uma senha com mais de 8 caracteres.", "error");
+        }
+        else if((tel.length < 13 || tel.length > 14) || tel.substring(0, 1) != '(' || tel.substring(3, 4) != ')'){
+            swal("Telefone inválido!", "Insira um telefone válido.", "error");
+        }
+        else{
+            requisicaoAtualizacaoDados(user, pass, passAnt, email, tel);
+        }
+    }); 
 });

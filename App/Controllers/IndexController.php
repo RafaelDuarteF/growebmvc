@@ -97,16 +97,35 @@
             $this->render('urlInvalida');
         }
         public function validarEmail() {
+            session_start();
             $email = $_POST['email'];
             if(!empty($email)) {
-                $usuario = Conteiner::getModel('User');
-                $usuario->__set('email', $email);
-                $validar = $usuario->validarEmail();
-                if($validar == true) {
-                    $retorno = 1;
+                if(isset($_SESSION['email'])) {
+                    if($email == $_SESSION['email']) {
+                        $retorno = 'equal';
+                    }
+                    else {
+                        $usuario = Conteiner::getModel('User');
+                        $usuario->__set('email', $email);
+                        $validar = $usuario->validarEmail();
+                        if($validar == true) {
+                            $retorno = 1;
+                        }
+                        else {
+                            $retorno = 0;
+                        }
+                    }
                 }
                 else {
-                    $retorno = 0;
+                    $usuario = Conteiner::getModel('User');
+                    $usuario->__set('email', $email);
+                    $validar = $usuario->validarEmail();
+                    if($validar == true) {
+                        $retorno = 1;
+                    }
+                    else {
+                        $retorno = 0;
+                    }
                 }
             }
             else {

@@ -56,5 +56,62 @@
                 header('location: /?erroAutenticacao=true');
             }
         }
+        public function validarSenha() {
+            session_start();
+            $senhaANT = false;
+            $senha = $_POST['senha'];
+            if(isset($_SESSION['cod'])) {
+                if($senha == $_SESSION['cod']) {
+                    $senhaANT = true;
+                }
+            }
+            if($senhaANT != true) {
+                $usuario = Conteiner::getModel('user');
+                $usuario->__set('senha', md5($senha));
+                $usuario->__set('id', $_SESSION['id']);
+                $retorno = $usuario->validarSenha();
+                if($retorno == $usuario->__get('senha')) {
+                    $senhaANT = true;
+                }
+                else {
+                    $senhaANT = false;
+                } 
+            }
+            echo json_encode($senhaANT);
+        }
+        public function validarAlteracao() {
+            session_start();
+            $novoNome = $_POST['nome'];
+            $novaSenha = $_POST['senha'];
+            $antigaSenha = $_POST['senhaAnt'];
+            $novoTelefone = $_POST['telefone'];
+            $novoEmail = $_POST['email'];
+            $usuario = Conteiner::getModel('user');
+            $usuario->__set('senha', md5($antigaSenha));
+            $usuario->__set('id', $_SESSION['id']);
+            if(strlen($novoNome) > 4 && strlen($novaSenha) > 8 || strlen($novoTelefone) > 13) {
+                $senha = $usuario->validarSenha();                
+                if($senha == md5($antigaSenha) || $antigaSenha == $_SESSION['cod']) {
+                    $usuario->__set('nome', $novoNome);
+                    $usuario->__set('email', $novoEmail);
+                    $usuario->__set('senha', md5($novaSenha));
+                    $usuario->__set('telefone', $novoTelefone);
+                    $retorno = $usuario->alterarDados();
+                    if($retorno == 1) {
+                        $_SESSION['nome'] = $novoNome;
+                        $_SESSION['email'] = $novoEmail;
+                        $_SESSION['telefone'] = $novoTelefone;
+                        $_SESSION['cod'] = '';
+                    }
+                }
+                else {
+                    $retorno = 0;
+                }
+            }
+            else {
+                $retorno = 0;
+            }
+            echo json_encode($retorno);
+        }
     }
 ?>

@@ -84,7 +84,16 @@
                 'controller' => 'appController',
                 'action' => 'alterarDados'
             );
-            
+            $routes['validarSenha'] = array(
+                'route' => '/validarSenha',
+                'controller' => 'appController',
+                'action' => 'validarSenha'
+            );
+            $routes['validarAlteracao'] = array(
+                'route' => '/validarAlteracao',
+                'controller' => 'appController',
+                'action' => 'validarAlteracao'
+            );
             $this->setRoutes($routes);
         }
     }

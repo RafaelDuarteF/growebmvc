@@ -6,15 +6,29 @@
                 <label class="tipAt" for="nomeAt">Nome: <a class="statusNome"></a></label><br>
                 <input class="inputAtDados" type="text" name="nomeAt" id="nomeAt" value="<?php echo $this->view->usuario['nome']; ?>"/><br>
                 <label class="tipAt" for="telAt">Telefone: </label><br>
-                <input class="inputAtDados" type="text" name="telAt" id="telAt" value="<?php echo $this->view->usuario['telefone']; ?>"/><br>
-                <label class="tipAt" for="emailAt">Email: </label><br>
+                <input class="inputAtDados" type="text" oninput="mascaraTel(this)" name="telAt" id="telAt" value="<?php echo $this->view->usuario['telefone']; ?>"/><br>
+                <label class="tipAt" for="emailAt">Email: <a class="statusEmail"></a> </label><br>
                 <input class="inputAtDados" type="email" name="emailAt" id="emailAt" value="<?php echo $this->view->usuario['email']; ?>"/><br>
                 <label class="tipAt" for="senhaAtAnt">Senha Antiga: </label><br>
                 <input class="inputAtDados" type="password" name="senhaAtAnt" id="senhaAtAnt"/><br>
                 <label class="tipAt" for="senhaAt">Nova Senha: </label><br>
                 <input class="inputAtDados" type="password" name="senhaAt" id="senhaAt"/><br>
-                <button type="button" class="btnAtDados">Atualizar</button>
+                <button type="button" class="btnAtDados"><b>Atualizar</b></button>
             </form>
         </div>
     </div>
 </div>
+<script>
+    function mascaraTel(i){
+        
+        var v = i.value;
+                    
+        if(isNaN(v[v.length-1])){ // impede entrar outro caractere que não seja número
+            i.value = v.substring(0, v.length-1);
+            return;
+        }
+        i.setAttribute("maxlength", "14");
+        if(v.length == 1) { i.value = "(" + v; }
+        if(v.length == 3) { i.value = v + ")" + " "; }
+    }
+</script>

@@ -26,8 +26,32 @@ function validarUsuario() {
     }
 }
 
+function requisicaoEmailAt(email) {
+    $.ajax({
+        type: 'POST',
+        url: '/validarEmail',
+        data: `email=${email}`,
+        dataType: 'json',
+        success: cb => {validarEmail(cb)},
+        error: error => {validarEmail('erro')}
+    });
+    function validarEmail(cb) {
+        if(cb == 1) {
+            $(".statusEmail").text("Já existente/Inválido");
+            $(".statusEmail").css('color', 'red');
+        }
+        else if(cb == 0) {
+            $(".statusEmail").text("Válido");
+            $(".statusEmail").css('color', 'green');
+        }
+        else {
+            $(".statusEmail").text('');
+        }
+    }
+}
+
 function requisicaoEmail() {
-    email = document.querySelector("#inputResSenha").value;
+    email = document.querySelector("#inputResEm").value;
     $.ajax({
         type: 'POST',
         url: '/validarEmail',
@@ -108,6 +132,7 @@ function requisicaoUsername(tipRetorno, username) {
         }
     }
 }
+
 function logarComCodigo(codRes) {
     $.ajax({
         type: 'POST',
@@ -131,6 +156,95 @@ function logarComCodigo(codRes) {
         }
         else{
             swal("Ocorreu um erro.", "Ocorreu um erro ao tentar logar, tente novamente mais tarde.", "error");
+        }
+    }
+}
+
+function requisicaoAtualizacaoDados(user, pass, passAnt, email, tel) {
+    $.ajax({
+        type: 'POST',
+        url: '/verificarUsername',
+        data: `nome=${user}`,
+        dataType: 'json',
+        success: cb => {
+            validarUserEnviado(cb);
+        },
+        error: erro =>{alert('Ocorreu um erro.')}
+    });
+    function validarUserEnviado(cb) {
+        if(cb == true) {
+            swal('Nome de usuário inválido.', 'O nome de usuário informado é inválido!', 'error');
+        }
+        else if(cb == false || cb == 'equal') {
+            $.ajax({
+                type: 'POST',
+                url: '/validarEmail',
+                data: `email=${email}`,
+                dataType: 'json',
+                success: cb => {
+                    validarEmail(cb);
+                },
+                error: erro =>{alert('Ocorreu um erro.')}
+            });
+            function validarEmail(cb) {
+                if(cb == 1) {
+                    swal('O e-mail informado é inválido.', 'E-Mail informado é já existente ou inválido!', 'error');
+                }
+                else if(cb == 0 || cb == 'equal') {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/validarSenha',
+                        data: `senha=${passAnt}`,
+                        dataType: 'json',
+                        success: cb => {
+                            validarSenha(cb);
+                        },
+                        error: erro =>{alert('Ocorreu um erro.')}
+                    });
+                    function validarSenha(cb) {
+                        if(cb == false) {
+                            swal('Senha antiga informada inválida!', 'Senha antiga informada não condizente!' ,'error');
+                        }
+                        else if(cb == true) {
+                            $.ajax({
+                                type: 'POST',
+                                url: '/validarAlteracao',
+                                data: `nome=${user}&senha=${pass}&senhaAnt=${passAnt}&telefone=${tel}&email=${email}`,
+                                dataType: 'json',
+                                success: cb => {
+                                    validarAlteracao(cb);
+                                },
+                                error: erro =>{alert('Ocorreu um erro.')}
+                            });
+                            function validarAlteracao(cb) {
+                                if(cb == 1) {
+                                    swal({
+                                        title: "Dados alterados.",
+                                        text: "Os dados foram alterados com sucesso!",
+                                        icon: "success",
+                                        button: "Ok",
+                                        })
+                                    .then((confirmError) => {
+                                        location.assign('/minhaConta');
+                                    });
+                                }
+                                else {
+                                    swal('Ocorreu um erro.', 'Ocorreu um erro, verifique se as informações inseridas são válidas!', 'error')
+                                }
+                            }
+                        }
+                        else {
+                            swal('Senha antiga informada inválida!', 'Senha antiga informada não condizente!' ,'error');
+                        }
+                    }
+                }
+                else {
+                    swal('O e-mail informado é inválido.', 'E-Mail informado é já existente ou inválido!', 'error');
+                }
+            }
+        }
+        else {
+            swal('Nome de usuário inválido.', 'O nome de usuário informado é inválido!', 'error');
         }
     }
 }

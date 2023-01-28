@@ -3,7 +3,7 @@
     <nav class="navb">
         <ul class="navl">
             <li>Planos</li>
-            <li>Nossos métodos</li>
+            <li>Sobre nós</li>
             <li>Documentação</li>
             <li>Contatos</li>
         </ul>
