@@ -52,4 +52,11 @@
 }
 .titleDireitos {
     color: #00ff88;
+    text-align: center;
+}
+.infosDireitos {
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: gainsboro;
 }

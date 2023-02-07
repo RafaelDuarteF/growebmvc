@@ -28,6 +28,19 @@
                         'imagens' => $dadosProj['pastaImagens'],
                         'dataAt' => $dadosProj['dataAtualizacao']
                     );
+                    $plano = Conteiner::getModel('plano');
+                    $plano->__set('codPlano', $meuProjeto['codPlano']);
+                    $meuPlano = $plano->verificarPlano();
+                    if(!empty($meuPlano['nomePlano'])) {
+                        $this->view->infosPlano = array(
+                            'direitosPlano' => $meuPlano['direitosPlano']
+                        );
+                    }
+                    else {
+                        $this->view->infosPlano = array(
+                            'direitosPlano' => 'Sem informações.'
+                        );
+                    }
                 }
                 else {
                     $this->view->projeto = false;

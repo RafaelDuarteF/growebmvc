@@ -35,8 +35,8 @@
                         <div class="infos1">
                             <label id="lblUsername" for="username"><b>Nome de usuário: </b><a class="statusNome"></a></label><br>
                             <input class="inputCad" type="text" value="<?= $nomeIn; ?>" name="username" placeholder="Ex: Rafo123" id="username"/><br>
-                            <label for="password"><b>Senha:</b></label><br>
-                            <input class="inputCad" type="password" name="password" placeholder="Ex: Eaam_2006" id="password"/><br>
+                            <label for="password"><b>Senha: </b><a id="password-status"></a></label><br>
+                            <input class="inputCad" oninput="verificarForcaSenha('input')" type="password" name="password" placeholder="Ex: Eaam_2006" id="password"/><br>
                         </div>
                         <div class="infos2">
                             <label for="telefone"><b>Telefone:</b></label><br>

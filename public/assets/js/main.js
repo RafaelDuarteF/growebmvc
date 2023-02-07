@@ -82,7 +82,34 @@ $(document).ready(function(){
             swal("Termo não marcado.", "Para se cadastrar, assine o termo de serviço e política de privacidade.", "error");
         }
         else{
-            requisicaoUsername('enviado');
+            forcaSenha = verificarForcaSenha('submit');
+            if(forcaSenha == 'forte') {
+                requisicaoUsername('enviado');
+            }
+            else if (forcaSenha == 'mCaractere') {
+                swal('Senha fraca!', 'Sua senha deve possuir pelo menos 8 caracteres!', 'error');
+            }
+            else if (forcaSenha == 'mediaSCE') {
+                swal('Senha média!', 'Sua senha deve possuir pelo menos um caractere especial!', 'error')
+            }
+            else if(forcaSenha == 'mediaSN') {
+                swal('Senha média!', 'Sua senha deve possuir pelo menos um número!', 'error');
+            }
+            else if(forcaSenha == 'mediaSA') {
+                swal('Senha média!', 'Sua senha deve possuir pelo menos uma letra alfabética!', 'error');
+            }
+            else if(forcaSenha == 'mediaSNCE') {
+                swal('Senha média!', 'Sua senha deve possuir pelo menos um número e um caractere especial!', 'error');
+            }
+            else if(forcaSenha == 'mediaSNA') {
+                swal('Senha média!', 'Sua senha deve possuir pelo menos um número e uma letra alfabética!', 'error');
+            }
+            else if(forcaSenha == 'mediaSACE') {
+                swal('Senha média!', 'Sua senha deve possuir pelo menos um caractere especial e uma letra alfabética!', 'error');
+            }
+            else {
+                swal('Senha inválida', 'Ocorreu um erro ao verificar essa senha. Por favor, tente outra.', 'error');
+            }
         }
     });
     $("#envResSenhaEm").click(() => {
@@ -139,3 +166,65 @@ $(document).ready(function(){
         }
     }); 
 });
+
+function verificarForcaSenha(forma) {
+    var numeros = /([0-9])/;
+    var alfabeto = /([a-zA-Z])/;
+    var chEspeciais = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+    
+    if(forma == 'input') {
+        if($('#password').val().length < 8) 
+        {
+            $('#password-status').html("<span style='color:red'>Fraco, insira no mínimo 8 caracteres</span>");
+        } 
+        else if ($('#password').val().match(numeros) && $('#password').val().match(alfabeto) && $('#password').val().match(chEspeciais)) {            
+            $('#password-status').html("<span style='color:green'><b>Forte</b></span>");
+        } 
+        else if ($('#password').val().match(numeros) && $('#password').val().match(alfabeto) && !$('#password').val().match(chEspeciais)) {
+            $('#password-status').html("<span style='color:orange'>Médio, insira pelo menos um caractere especial.</span>");
+        }
+        else if ($('#password').val().match(numeros) && !$('#password').val().match(alfabeto) && $('#password').val().match(chEspeciais)) {
+            $('#password-status').html("<span style='color:orange'>Médio, insira pelo menos uma letra alfabética.</span>");
+        }
+        else if (!$('#password').val().match(numeros) && $('#password').val().match(alfabeto) && $('#password').val().match(chEspeciais)) {
+            $('#password-status').html("<span style='color:orange'>Médio, insira pelo menos um número.</span>");
+        }
+        else if (!$('#password').val().match(numeros) && $('#password').val().match(alfabeto) && !$('#password').val().match(chEspeciais)) {
+            $('#password-status').html("<span style='color:orange'>Médio, insira pelo menos um número e um caractere especial.</span>");
+        }
+        else if (!$('#password').val().match(numeros) && !$('#password').val().match(alfabeto) && $('#password').val().match(chEspeciais)) {
+            $('#password-status').html("<span style='color:orange'>Médio, insira pelo menos um número e uma letra alfabética.</span>");
+        }
+        else if ($('#password').val().match(numeros) && !$('#password').val().match(alfabeto) && !$('#password').val().match(chEspeciais)) {
+            $('#password-status').html("<span style='color:orange'>Médio, insira pelo menos um caractere especial e uma letra alfabética.</span>");
+        }
+    }
+    else if(forma == 'submit') {
+        if($('#password').val().length < 8) 
+        {
+            forcaSenha = 'mCaractere';
+        } 
+        else if ($('#password').val().match(numeros) && $('#password').val().match(alfabeto) && $('#password').val().match(chEspeciais)) {            
+            forcaSenha = 'forte'
+        } 
+        else if ($('#password').val().match(numeros) && $('#password').val().match(alfabeto) && !$('#password').val().match(chEspeciais)) {
+            forcaSenha = 'mediaSCE';
+        }
+        else if ($('#password').val().match(numeros) && !$('#password').val().match(alfabeto) && $('#password').val().match(chEspeciais)) {
+            forcaSenha = 'mediaSA';
+        }
+        else if (!$('#password').val().match(numeros) && $('#password').val().match(alfabeto) && $('#password').val().match(chEspeciais)) {
+            forcaSenha = 'mediaSN';
+        }
+        else if (!$('#password').val().match(numeros) && $('#password').val().match(alfabeto) && !$('#password').val().match(chEspeciais)) {
+            forcaSenha = 'mediaSNCE'
+        }
+        else if (!$('#password').val().match(numeros) && !$('#password').val().match(alfabeto) && $('#password').val().match(chEspeciais)) {
+            forcaSenha = 'mediaSNA';
+        }
+        else if ($('#password').val().match(numeros) && !$('#password').val().match(alfabeto) && !$('#password').val().match(chEspeciais)) {
+            forcaSenha = 'mediaSACE'
+        }
+        return forcaSenha;
+    }
+}

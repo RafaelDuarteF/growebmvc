@@ -124,7 +124,7 @@
     cursor: pointer;
     opacity: 70%;
 }
-#lblUsername .statusNome {
+#lblUsername .statusNome, #password-status {
     font-size: 9pt;
 }
 @media only screen and (max-width: 650px){

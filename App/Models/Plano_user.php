@@ -15,7 +15,7 @@
         public function verificarProjetos () {
             if(!empty($this->__get('idUser'))) {
                 try {
-                    $query = "SELECT pu.valorAdicional as valorAd, p.valorInicial as valorIni, p.nomePlano as nomePlano, p.descricao as descricaoPlano FROM plano_user as pu INNER JOIN plano as p on pu.codPlano = p.codPlano WHERE pu.idUser = :id";
+                    $query = "SELECT pu.codPlano as codPlano, pu.valorAdicional as valorAd, p.valorInicial as valorIni, p.nomePlano as nomePlano, p.descricao as descricaoPlano FROM plano_user as pu INNER JOIN plano as p on pu.codPlano = p.codPlano WHERE pu.idUser = :id";
                     $stmt = $this->db->prepare($query);
                     $stmt->bindValue(':id', $this->__get('idUser'));
                     $stmt->execute();

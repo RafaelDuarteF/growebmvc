@@ -18,8 +18,8 @@
                 </div>
                     <div class="direitosPlano">
                         <div class="infoDireitosPlano">
-                            <h3 class="titleDireitos">Com o plano profissional você tem direito a:</h3>
-                            <p></p>
+                            <h3 class="titleDireitos">Com o <?= strtolower($this->view->projeto['nomePlano']); ?> você tem direito a:</h3>
+                            <p class="infosDireitos"><?= str_replace(";", "<br>", $this->view->infosPlano['direitosPlano']); ?></p>
                         </div>
                     </div>
                 <?php
