@@ -7,6 +7,10 @@
         private $senha;
         private $telefone;
         private $id;
+        private $cep;
+        private $cidade;
+        private $bairro;
+        private $logradouro;
         private $userValido = false;
         private $cbConect;
 
@@ -51,7 +55,7 @@
             $usernameValidate = $this->existsUsername();
             $emailValidate = $this->validarEmail();
             if(!$usernameValidate && !$emailValidate) {
-                if(strlen($this->__get('senha')) < 8 || strlen($this->__get('telefone')) < 11) {
+                if(strlen($this->__get('senha')) < 8 || strlen($this->__get('telefone')) < 11 || strlen($this->__get('cep')) < 8) {
                     return false;
                 }
                 else {
@@ -73,17 +77,25 @@
         }
         public function salvar() {
             try {
-                $query = "INSERT INTO user(nomeUser, senha, telefone, email)VALUES(:nome, :senha, :telefone, :email)";
+                $query = "INSERT INTO user(nomeUser, senha, telefone, email, cep, bairro, logradouro, cidade)VALUES(:nome, :senha, :telefone, :email, :cep, :bairro, :logradouro, :cidade)";
                 $stmt =  $this->db->prepare($query);
                 $stmt->bindValue(':nome', $this->__get('nome'));
                 $stmt->bindValue(':senha', md5($this->__get('senha')));
                 $stmt->bindValue(':telefone', $this->__get('telefone'));
                 $stmt->bindValue(':email', $this->__get('email'));
+                $stmt->bindValue(':cep', $this->__get('cep'));
+                $stmt->bindValue(':bairro', md5($this->__get('bairro')));
+                $stmt->bindValue(':logradouro', $this->__get('logradouro'));
+                $stmt->bindValue(':cidade', $this->__get('cidade'));
                 $stmt->execute();
                 session_start();
                 $_SESSION['nome'] = $this->__get('nome');
                 $_SESSION['telefone'] = $this->__get('telefone');
                 $_SESSION['email'] = $this->__get('email');
+                $_SESSION['cep'] = $this->__get['cep'];
+                $_SESSION['bairro'] = $this->__get['bairro'];
+                $_SESSION['logradouro'] = $this->__get['logradouro'];
+                $_SESSION['cidade'] = $this->__get['cidade'];
                 $_SESSION['cookiesLogin'] = false;
                 $this->getID();
                 $_SESSION['id'] = $this->__get('id');

@@ -11,6 +11,10 @@
                 $nomeIn = $this->view->insertsErroCadastro['nome'];
                 $telIn = $this->view->insertsErroCadastro['telefone'];
                 $emailIn = $this->view->insertsErroCadastro['email'];
+                $cepIn = $this->view->insertsErroCadastro['cep'];
+                $logradouroIn = $this->view->insertsErroCadastro['logradouro'];
+                $bairroIn = $this->view->insertsErroCadastro['bairro'];
+                $cidadeIn = $this->view->insertsErroCadastro['cidade'];
             }
         }
     ?>
@@ -45,6 +49,20 @@
                             <input class="inputCad" title="Certifique-se de usar um E-Mail que você possui acesso!" type="email" value="<?= $emailIn; ?>" placeholder="Ex: rafaeldd@seuemail.com" name="email" id="email"/><br>
                         </div>
                     </div>
+                    <div id="cad2">
+                        <div class="infos3">
+                            <label for="cep"><b>CEP: </b><a class="statusCEP"></a></label><br>
+                            <input class="inputCad" type="text" value="<?= $cepIn; ?>" onblur="verificarEndereco(this.value)" placeholder="Ex: 02141-000" oninput="mascaraCEP(this)" name="cep" id="cep"/><br>
+                            <label for="logradouro"><b>Logradouro: </b></label><br>
+                            <input class="inputCad" type="text" readonly value="<?= $logradouroIn; ?>" placeholder="Ex: Rua das flores" name="logradouro" id="logradouro"/><br>
+                        </div>
+                        <div class="infos4">
+                            <label for="bairro"><b>Bairro: </b></label><br>
+                            <input class="inputCad" type="text" readonly value="<?= $bairroIn; ?>" placeholder="Ex: Vila das rosas" name="bairro" id="bairro"/><br>
+                            <label for="cidade"><b>Cidade: </b></label><br>
+                            <input class="inputCad" type="text" readonly value="<?= $cidadeIn; ?>" placeholder="Ex: São Paulo - SP" name="cidade" id="cidade"/><br>
+                        </div>
+                    </div>
                     <input type="checkbox" name="termsCk" id="termsCk"><label class="lblTerms" for="termsCk">Eu aceito os <a>Termos de Serviço</a> e a <a>Política de Privacidade</a> da Groweb</label>
                     <button type="button" class="btnCad"><b>Cadastrar</b></button>
                 </form>
@@ -52,7 +70,7 @@
         </div>
     </div>
     <script>
-         function mascaraTel(i){
+        function mascaraTel(i){
    
             var v = i.value;
             
@@ -63,5 +81,16 @@
             i.setAttribute("maxlength", "14");
             if(v.length == 1) { i.value = "(" + v; }
             if(v.length == 3) { i.value = v + ")" + " "; }
+        }
+        function mascaraCEP(i){
+   
+            var v = i.value;
+            
+            if(isNaN(v[v.length-1])){ // impede entrar outro caractere que não seja número
+                i.value = v.substring(0, v.length-1);
+                return;
+            }
+            i.setAttribute("maxlength", "9");
+            if(v.length == 5) { i.value = v + "-"; }
         }
     </script>

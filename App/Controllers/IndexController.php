@@ -32,11 +32,19 @@
             $getNomeCadastroErro = isset($_GET['nomeus']) ? $_GET['nomeus'] : '';
             $getTelefoneCadastroErro = isset($_GET['telin']) ? $_GET['telin'] : '';
             $getEmailCadastroErro = isset($_GET['emailin']) ? $_GET['emailin'] : '';
+            $getCEPCadastroErro = isset($_GET['cepin']) ? $_GET['cepin'] : '';
+            $getLogradouroCadastroErro = isset($_GET['logradouroin']) ? $_GET['logradouroin'] : '';
+            $getCidadeCadastroErro = isset($_GET['cidadein']) ? $_GET['cidadein'] : '';
+            $getBairroCadastroErro = isset($_GET['bairroin']) ? $_GET['bairroin'] : '';
             $this->view->erroCadastro = $getErroCadastroUrl;
             $this->view->insertsErroCadastro = array(
                 'nome' => $getNomeCadastroErro,
                 'email' => $getEmailCadastroErro,
                 'telefone' => $getTelefoneCadastroErro,
+                'cep' => $getCEPCadastroErro,
+                'logradouro' => $getCidadeCadastroErro,
+                'bairro' => $getBairroCadastroErro,
+                'cidade' => $getCidadeCadastroErro,
             );
             $this->render('cadastro', 'layoutNHeader');
         }
@@ -68,12 +76,20 @@
             $senha = isset($_POST['username']) ? $_POST['password'] : '';
             $telefone = isset($_POST['username']) ? $_POST['telefone'] : '';
             $email = isset($_POST['username']) ? $_POST['email'] : '';
-            if(!empty($nome) && !empty($senha) && !empty($telefone) && !empty($email)) {
+            $cep = isset($_POST['cep']) ? $_POST['cep'] : '';
+            $cidade = isset($_POST['cidade']) ? $_POST['cidade'] : '';
+            $bairro = isset($_POST['bairro']) ? $_POST['bairro'] : '';
+            $logradouro = isset($_POST['logradouro']) ? $_POST['logradouro'] : '';
+            if(!empty($nome) && !empty($senha) && !empty($telefone) && !empty($email) && !empty($cep) && !empty($cidade) && !empty($bairro) && !empty($logradouro)) {
                 $usuario = Conteiner::getModel('User');
                 $usuario->__set('nome', $nome);
                 $usuario->__set('senha', $senha);
                 $usuario->__set('telefone', $telefone);
                 $usuario->__set('email', $email);
+                $usuario->__set('cep', $cep);
+                $usuario->__set('cidade', $cidade);
+                $usuario->__set('bairro', $bairro);
+                $usuario->__set('logradouro', $logradouro);
                 $validarCadastro = $usuario->validarCadastro();
                 if($validarCadastro) {
                     $statusEmail = $this->enviarEmail($usuario->__get('nome'), $usuario->__get('email'));

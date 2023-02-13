@@ -65,8 +65,12 @@ $(document).ready(function(){
         pass = document.getElementById("password").value;
         tel = document.getElementById("telefone").value;
         email = document.getElementById("email").value;
+        cep = document.getElementById("cep").value;
+        bairro = document.getElementById("bairro").value;
+        cidade = document.getElementById("cidade").value;
+        logradouro = document.getElementById("logradouro").value;
         ckTerm = document.getElementById("termsCk").checked;
-        if(user.length == 0 || pass == 0 || tel == 0 || email == 0){
+        if(user.length == 0 || pass.length == 0 || tel.length == 0 || email.length == 0 || cep.length == 0 && bairro.length == 0 && cidade.length == 0 && logradouro.length == 0 ){
             swal("Faltam informações!", "Há informações não preenchidas.", "error");
         }
         else if(user.length < 4){
@@ -223,8 +227,39 @@ function verificarForcaSenha(forma) {
             forcaSenha = 'mediaSNA';
         }
         else if ($('#password').val().match(numeros) && !$('#password').val().match(alfabeto) && !$('#password').val().match(chEspeciais)) {
-            forcaSenha = 'mediaSACE'
+            forcaSenha = 'mediaSACE';
         }
         return forcaSenha;
+    }
+}
+function verificarEndereco(cep) {
+    if(cep.length != 9){
+        swal("CEP Inválido", "Insira um CEP válido!", "error");
+    }
+    else{
+        let end = new XMLHttpRequest();
+        let url = 'http://viacep.com.br/ws/' + cep + '/json/';
+        try{
+            end.open('GET', url);
+        }
+        catch(error){
+            document.getElementByClass("badCep").textContent = "Cep errado mano";
+        }
+        end.send();
+        end.onreadystatechange = () => {
+            if(end.readyState == 4 && end.status == 200) {
+                let dadosEnd = end.responseText;
+                let dadosEndObj = JSON.parse(dadosEnd);
+                if(dadosEndObj.logradouro == undefined){
+                    swal("CEP Inválido", "Insira um CEP válido!", "error");
+                }
+                else{
+                    document.getElementById('logradouro').value = dadosEndObj.logradouro;
+                    document.getElementById('bairro').value = dadosEndObj.bairro;
+                    cidadeEstado = dadosEndObj.localidade + " - " + dadosEndObj.uf;
+                    document.getElementById('cidade').value = cidadeEstado;
+                }
+            }
+        }
     }
 }

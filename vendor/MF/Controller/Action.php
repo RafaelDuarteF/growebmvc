@@ -46,6 +46,10 @@
                     'email' => $_SESSION['email'],
                     'telefone' => $_SESSION['telefone'],
                     'id' => $_SESSION['id'],
+                    'cep' => $_SESSION['cep'],
+                    'cidade' => $_SESSION['cidade'],
+                    'logradouro' => $_SESSION['logradouro'],
+                    'bairro' => $_SESSION['bairro'],
                     'cookiesLogin' => isset($_SESSION['cookiesLogin']) ? $_SESSION['cookiesLogin'] : false
                 );
             }
