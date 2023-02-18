@@ -20,6 +20,10 @@
                 $_SESSION['nome'] = $usuario->__get('nome');
                 $_SESSION['telefone'] = $usuario->__get('telefone');
                 $_SESSION['email'] = $usuario->__get('email');
+                $_SESSION['cep'] = $usuario->__get('cep');
+                $_SESSION['bairro'] = $usuario->__get('bairro');
+                $_SESSION['cidade'] = $usuario->__get('cidade');
+                $_SESSION['logradouro'] = $usuario->__get('logradouro');
                 $_SESSION['cookiesLogin'] = $usuario->__get('cbConect');
                 $_SESSION['id'] = $usuario->__get('id');
                 echo json_encode(true);

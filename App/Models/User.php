@@ -21,7 +21,7 @@
             $this->$attr = $value;
         }
         public function validarUsuario() {
-            $query = "SELECT nomeUser, email, telefone, id FROM user WHERE email = :email and senha = :senha";
+            $query = "SELECT nomeUser, email, telefone, id, cep, logradouro, bairro, cidade FROM user WHERE email = :email and senha = :senha";
             $stmt = $this->db->prepare($query);
             $stmt->bindValue(':email', $this->__get('email'));
             $stmt->bindValue(':senha', md5($this->__get('senha')));
@@ -31,6 +31,10 @@
                 $this->__set('nome', $usuarioV['nomeUser']);
                 $this->__set('email', $usuarioV['email']);
                 $this->__set('telefone', $usuarioV['telefone']);
+                $this->__set('cep', $usuarioV['cep']);
+                $this->__set('logradouro', $usuarioV['logradouro']);
+                $this->__set('bairro', $usuarioV['bairro']);
+                $this->__set('cidade', $usuarioV['cidade']);
                 $this->__set('id', $usuarioV['id']);
                 $this->__set('userValido', true);
             }

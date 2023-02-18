@@ -1,4 +1,4 @@
-<div class="f minhaConta">
+<div class="f minhaConta" style="height:auto; padding-bottom:40px">
     <div class="perfil sw">
         <div class="infosConta">
             <h1 class="titleMConta">Minha Conta</h1>
@@ -7,6 +7,9 @@
             <p class="telConta infoConta"><b>Telefone:</b> <?php echo $this->view->usuario['telefone']; ?></p>
             <p class="emailConta infoConta"><b>Email:</b> <?php echo $this->view->usuario['email']; ?></p>
             <p class="infoConta"><b>Logradouro:</b> <?php echo $this->view->usuario['logradouro']; ?></p>
+            <p class="infoConta"><b>Bairro:</b> <?php echo $this->view->usuario['bairro']; ?></p>
+            <p class="infoConta"><b>Cidade:</b> <?php echo $this->view->usuario['cidade']; ?></p>
+            <p class="infoConta"><b>CEP:</b> <?php echo $this->view->usuario['cep']; ?></p>
         </div>
         <button class="alterarDados" onclick="redirect('/alterarDados')">Alterar dados</button>
     </div>

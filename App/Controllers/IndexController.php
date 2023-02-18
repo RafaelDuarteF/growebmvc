@@ -42,7 +42,7 @@
                 'email' => $getEmailCadastroErro,
                 'telefone' => $getTelefoneCadastroErro,
                 'cep' => $getCEPCadastroErro,
-                'logradouro' => $getCidadeCadastroErro,
+                'logradouro' => $getLogradouroCadastroErro,
                 'bairro' => $getBairroCadastroErro,
                 'cidade' => $getCidadeCadastroErro,
             );
